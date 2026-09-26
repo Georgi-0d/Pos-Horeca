@@ -33,7 +33,7 @@ cargo install tauri-cli
 ### 3. Клонирај го репозиториумот ###
 
 ```
-git clone <URL_на_репозиториумот>
+git clone https://develop.finki.ukim.mk/git/poshoreca.git
 cd poshoreca
 ```
 
