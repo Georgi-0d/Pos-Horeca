@@ -1,7 +1,116 @@
-# Tauri + Vanilla
+# Build Instructions 
 
-This template should help get you started developing with Tauri in vanilla HTML, CSS and Javascript.
+## Опис на развојната околина 
 
-## Recommended IDE Setup
+Прототипот е развиен со следниве алатки и библиотеки:
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+ * Rust (верзија 1.75 или понова)
+ * Cargo - систем за изградба
+ * Tauri CLI (2.x)
+ * sqlx (0.7+) - асинхрона библиотека за PostgreSQL
+ * Node.js (18+) и npm
+ * PostgreSQL (верзија 14 или понова)
+
+## Инструкции за изградба ##
+
+### 1. Инсталирај Rust ###
+
+Симни го Rust од официјалниот сајт: https://rustup.rs/
+
+```
+# Linux / Mac
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+За Windows, симни `rustup-init.exe` и изврши го.
+
+### 2. Инсталирај Tauri CLI ###
+
+```
+cargo install tauri-cli
+```
+
+### 3. Клонирај го репозиториумот ###
+
+```
+git clone <URL_на_репозиториумот>
+cd poshoreca
+```
+
+### 4. Конфигурирај ја базата ###
+
+Креирај `.env` датотека во root директориумот:
+
+```
+DATABASE_URL=postgres://db_202526z_va_prj_poshoreca_owner:4040c5ddf69@localhost:9999/db_202526z_va_prj_poshoreca
+```
+
+### 5. Стартувај SSH тунел ###
+
+Симни ја SSH тунел скриптата од https://bazi.finki.ukim.mk/resources/Software
+
+Конфигурирај ја `.bat` датотеката:
+
+```
+plink -v -ssh -2 -C -N -L 9999:localhost:5432 -pw b19e481c t_poshoreca@194.149.135.130
+```
+
+Стартувај ја скриптата. Треба да видиш:
+```
+Tunnel established. Press Ctrl+C to close.
+```
+
+### 6. Инсталирај Node dependencies ###
+
+```
+npm install
+```
+
+### 7. Изгради го проектот ###
+
+```
+npm run tauri build
+```
+
+### 8. Стартувај ја апликацијата ###
+
+```
+npm run tauri dev
+```
+
+## Инструкции за тестирање ##
+
+### Стартување на апликацијата ###
+
+По извршувањето на `npm run tauri dev`, апликацијата ќе се отвори во нов прозорец.
+
+### Тест корисници ###
+
+Апликацијата доаѓа со неколку предефинирани корисници за тестирање:
+
+ * Администратор:
+  * PIN: `1234`
+
+ * Келнер:
+  * PIN: `5678`
+
+ * Менаџер:
+  * PIN: `9012`
+
+### Чекор-по-чекор мини-водич ###
+
+ 1. Најава: Внеси PIN код за да се најавиш.
+ 2. Главно мени: По најавата, ќе видиш мени со достапни опции зависно од твојата улога.
+ 3. Нова нарачка: Избери слободна маса за да креираш нова нарачка.
+ 4. Додавање на ставка: Избери производ од листата и внеси количина.
+ 5. Плаќање: Избери метод на плаќање и потврди.
+ 6. Z-извештај (менаџер): Прегледај го извештајот и потврди.
+ 7. Дневен извештај (менаџер): Види ги деталите за денес.
+
+### Излез од апликацијата ###
+
+Затвори го прозорецот или избриши опција „Излез" од менито.
+
+## Изворен код ##
+
+Целосниот изворен код е достапен во git репозиториумот на проектот, достапен преку системот DEVELOP EPRMS.
